@@ -1,0 +1,40 @@
+# Generate DSA Parameters
+openssl dsaparam 1024 dsaparam.pem
+
+#Read the parameters
+openssl dsaparam -in dsaparam.pem -text -noout > parameters
+
+# Generate private key
+
+openssl gendsa dsaparam.pem -out dsa_priv.pem
+
+#Genearte the public key 
+openssl dsa -in dsa_priv.pem -pubout -out dsa_pub.pem
+
+# Confirm and read private parameters
+openssl dsa -in dsa_priv.pem -noout -text > private_parameters
+
+#GEnerate a signature
+echo "andy is great" > thingtosign.txt
+
+#Generate binary signature file from text file "thingtosign.txt.
+openssl dgst -sha256 -sign dsa_priv.pem thingtosign.txt > signature.bin
+
+#Read the signature file. THis command reads the two integers in the signature file. 
+##You should see 2 length 40 hex strings (20 bytes each for the 160 bit mod q
+q numbers). They are r and s Save them into a script along with the above P,G,Q,d. These are from above!
+
+openssl asn1parse -in signature.bin -inform der
+
+
+#Validate the signature. To validate we need the top 160 bits of the SHA256 of "andy is great\n" (the file adds a newline character at the end). You can do this in code using  
+
+shasum -a 256 thingtosign.txt
+
+or 
+
+z = int(hashlib.sha256("andy is great\n").hexdigest()[:40], 16) in Python
+
+
+#Now validate 
+openssl dgst -sha256 -verify dsa_pub.pem -signature signature.bin thingtosign.txt 

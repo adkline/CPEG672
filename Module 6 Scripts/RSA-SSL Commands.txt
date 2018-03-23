@@ -1,0 +1,4 @@
+ssh-keygen -t rsa 
+
+
+openssl rsa -text -noout -in rsa_key 

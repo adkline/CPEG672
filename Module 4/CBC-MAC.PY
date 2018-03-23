@@ -11,8 +11,6 @@ key = 'andy love simone'
 
 Message = 'andy love simoneandy love simone'
 
-H0 = IV
-
 cipher = AES.new(key, AES.MODE_CBC, IV)
 
 

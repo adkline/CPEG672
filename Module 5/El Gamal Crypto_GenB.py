@@ -4,15 +4,15 @@ from Crypto.Util.number import *
 p = int('E912ECF78A51FC5BBFA26A00E07A0CEC5ECEB897891643DD7DDD8056A51C71124258D52DAEF464B929F6397101F00C67CFC09B3D068B522E1C8B566431936C3A606A47928582F0D8D6B23F9019FF06A900CD5AD97E02CD3DEAA0495C968A2345858C6556623A61124C711DC0708999C08D5A349592F37DFE07A49C0D82241403',16)
 
 
-a = getRandomRange(2, p-2) 
+b = getRandomRange(2, p-2) 
 #print GCD(a, p-1)
 
-while GCD(a, p-1) != 1:
-    a = getRandomRange(2, p-2) 
+while GCD(b, p-1) != 1:
+    b = getRandomRange(2, p-2) 
     
 base = 2
-A = pow(base, a, p)
-print "a is " , a
+B = pow(base, b, p)
+print "b is " , b
 print " p = " , p
 print " g = " , base
-print " A = " , A
+print " B = " , B

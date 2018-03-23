@@ -1,0 +1,13 @@
+##Look at curves which have been approved
+openssl ecparam -list_curves
+
+
+## Generate ECC parameters
+openssl ecparam -name brainpoolP512t1 -out brainpoolP512t1.pem -param_enc explicit
+
+
+## Open the parameters 
+openssl ecparam -in brainpoolP512t1.pem -text -noout
+\
+## Change the name to parametsr
+openssl ecparam -in brainpoolP512t1.pem -text -noout > plaintext

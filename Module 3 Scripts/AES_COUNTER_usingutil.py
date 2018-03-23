@@ -9,7 +9,6 @@ block_size = 16
 key= 'helloworld'
 
 key_len = len(key)
-
 key_pad = key
 
 while len(key_pad) < block_size:
@@ -27,8 +26,6 @@ print key_pad
 #     global count
 #     count+=10
 #     return str(hex(count).split('x')[-1].zfill(AES.block_size))
-
-
 ctr = Counter.new(128)
 
 #url = 'https://d1b10bmlvqabco.cloudfront.net/attach/jd4nzowqhkh3ja/j6xy2s8imyu2rr/je3nnwlel0y3/output.png'
