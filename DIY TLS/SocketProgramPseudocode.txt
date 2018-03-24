@@ -1,0 +1,47 @@
+psudeocode for TLS sockt program. 
+Client (Alice) and server (Bob) architecture. 
+
+1. Set up TCP addresses and ports
+
+2. Open ports
+
+3. Alice sends first transaction
+    a. Alice generates a. 
+    b. Alice generates A
+    c. Alice signs A
+    d. Alice sends to Bob
+   
+   One messge [A(x1):A(y1):SIG_A(x1):SIG_A(y1):n:e]
+   
+4. Bob will recieve message
+    a. Bob will verify message
+    b. Bob will generate b and B
+    c. Bob Signs B
+    d. Bob sends Alice B
+    
+    One messge [B(x1):B(y1):SIG_B:n:e]
+    
+5. Alice generates shared key. 
+    a. key for AES is the first 16 bytes
+    b. Nonce starts as last 16 bytes. Each time a message is recieve, Nonce is hashed, first 16 bytes taken. 
+    
+6. Bob generates shared key
+    a. key for AES is the first 16 bytes
+    b. Nonce starts as last 16 bytes. Each time a message is recieve, Nonce is hashed, first 16 bytes taken. 
+    
+7. Alice encrypts message Ma = "This is a message to Bob" 
+    a. Alice signs Ma
+    b. Alice sends Bob
+    
+    [cipher, signed, n, e]
+    
+8. Bob recieved message
+    a. Bob verifes Alice signature
+    b. Bob decrypts message 
+        Print the message!
+    c. Bob encrypts message Ba = "You wasted bandwidth to send that???"
+    d. Bob sends Alice
+    
+    [cipher, signed, n, e]
+
+

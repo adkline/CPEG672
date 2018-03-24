@@ -4,29 +4,34 @@ from Crypto.Random import get_random_bytes
 
 
 
-def encrypt_GCM(data, key):
+def encrypt_GCM(data, key,nonce):
     #data = "a message to encrypt"
-    #key = get_random_bytes(16)
     #Must make a new nonce each time!
-    nonce = get_random_bytes(16)
-    #print "The Nonce is", nonce, "\n" 
+       #print "The Nonce is", nonce, "\n" 
     cipher = AES.new(key, AES.MODE_GCM, nonce = nonce)
+    #cipher = AES.new(key, AES.MODE_GCM)
     ciphertext = cipher.encrypt(data)
     #print "Outputs ciphertext: " , ciphertext
     return (ciphertext, nonce)
 
-def decrypt_GCM(cipher, key, nonce):
+def decrypt_GCM(cipher, key,nonce):
     #data = "a message to encrypt"
     #key = get_random_bytes(16)
     #Must make a new nonce each time!
-    nonce = get_random_bytes(16)
-    #print "The Nonce is", nonce, "\n" 
+     #print "The Nonce is", nonce, "\n" 
     # print "Outputs ciphertext: " , ciphertext
     decipher = AES.new(key, AES.MODE_GCM, nonce=nonce)
-    plaintext = decipher.decrypt(ciphertext)
+    #decipher = AES.new(key, AES.MODE_GCM)
+    plaintext = decipher.decrypt(cipher)
     return (plaintext)
 
+nonce = get_random_bytes(16)
+key = get_random_bytes(16)
+m = "This is a message for Bob"
+ciphertext = encrypt_GCM(m,key,nonce)
 
+print ciphertext
 
-#file_out = open("encrypted.bin", "wb")
-#[ file_out.write(x) for x in (cipher.nonce, tag, ciphertext) ]
+deciphered = decrypt_GCM(ciphertext[0], key,nonce)
+
+print deciphered    
